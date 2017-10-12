@@ -7,6 +7,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MainCommand implements CommandExecutor {
+
+    Main plugin;
+
+    public MainCommand (Main pl){
+        plugin = pl;
+    }
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         Player p = (Player) sender;
@@ -32,8 +38,8 @@ public class MainCommand implements CommandExecutor {
             if(args[0].equalsIgnoreCase("join")){
                 if(p.hasPermission("uhc.join")){
                     Main.WaitingPlayers.add(p);
-                    Main.min_players++;
-                    p.sendMessage(Main.prefix + "You joined UHC");
+                    p.sendMessage(Main.prefix + "§3You joined UHC");
+                    plugin.startCountDown();
                 }
             }
         }

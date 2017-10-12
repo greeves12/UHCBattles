@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="UHCBattles">
+    <output-path>$USER_HOME$/Desktop/Servers/Test Server - 1.8/plugins</output-path>
+    <root id="archive" name="UHCBattles.jar">
+      <element id="module-output" name="UHCBattles" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/plugin.yml" />
+    </root>
+  </artifact>
+</component>

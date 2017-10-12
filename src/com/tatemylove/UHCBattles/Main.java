@@ -1,5 +1,6 @@
 package com.tatemylove.UHCBattles;
 
+import com.tatemylove.UHCBattles.Arena.BaseArena;
 import com.tatemylove.UHCBattles.Arena.GameCountDown;
 import com.tatemylove.UHCBattles.Commands.MainCommand;
 import com.tatemylove.UHCBattles.Files.AchievementFile;
@@ -15,18 +16,17 @@ public class Main extends JavaPlugin {
     public static String prefix = "§6[UHCBattles] ";
     public static ArrayList<Player> WaitingPlayers = new ArrayList<>();
     public static ArrayList<Player> PlayingPlayers = new ArrayList<>();
-    public static int min_players = 1;
+    public static int min_players = 0;
     public static int max_players = 10;
     public static int startCountDownId;
 
     public void onEnable(){
-        startCountDown();
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
 
         ArenaFile.setup(this);
         AchievementFile.setup(this);
 
-        MainCommand cmd = new MainCommand();
+        MainCommand cmd = new MainCommand(this);
         getCommand("battles").setExecutor(cmd);
     }
     public void startCountDown(){

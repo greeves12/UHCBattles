@@ -15,10 +15,10 @@ public class getArena {
     {
         ArrayList<Integer> numbers = new ArrayList();
         for (int k = 0; ArenaFile.getData().contains("Arenas." + k + ".Name"); k++) {
-            numbers.add(Integer.valueOf(k));
+            numbers.add(k);
         }
         Collections.shuffle(numbers);
-        return ((Integer)numbers.get(0)).intValue();
+        return numbers.get(0);
     }
 
     public static int getNextArena()

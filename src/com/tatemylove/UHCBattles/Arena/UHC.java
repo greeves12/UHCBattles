@@ -41,7 +41,7 @@ public class UHC {
                     }
                     if (redTeam.contains(p)) {
                         Team.put(p, "Red");
-                    } else {
+                    } else if(blueTeam.contains(p)){
                         Team.put(p, "Blue");
                     }
                 }
@@ -54,10 +54,10 @@ public class UHC {
             if(BaseArena.states == BaseArena.ArenaStates.Started){
                 for(Player p : Main.PlayingPlayers){
                     if(blueTeam.contains(p)){
-                        p.sendMessage(Main.prefix + "You have joined the blue team");
+                        p.sendMessage(Main.prefix + "§bYou have joined the blue team");
                         p.teleport(getArena.getBlueSpawn());
                     }else if (redTeam.contains(p)){
-                        p.sendMessage(Main.prefix + "You have joined the red team");
+                        p.sendMessage(Main.prefix + "§cYou have joined the red team");
                         p.teleport(getArena.getRedSpawn());
                     }
                 }

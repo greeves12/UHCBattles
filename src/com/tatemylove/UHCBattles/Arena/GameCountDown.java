@@ -15,7 +15,7 @@ public class GameCountDown extends BukkitRunnable{
 
     Main plugin;
     public GameCountDown(Main pl){
-        pl = plugin;
+        plugin = pl;
     }
 
 
@@ -26,7 +26,7 @@ public class GameCountDown extends BukkitRunnable{
             if(Main.WaitingPlayers.size() < Main.min_players){
                 plugin.restartCountDown();
                 for(Player p : Main.WaitingPlayers){
-                    p.sendMessage(Main.prefix + "Not enough players, restarting countdown");
+                    p.sendMessage(Main.prefix + "§cNot enough players, restarting countdown");
                 }
                 return;
             }
@@ -37,7 +37,7 @@ public class GameCountDown extends BukkitRunnable{
         }
         if((TimeUntilStart % 10 == 0) || (TimeUntilStart < 0)){
             for(Player p : Main.WaitingPlayers){
-                p.sendMessage(Main.prefix + TimeUntilStart + " seconds until start! Next Arena is " + getArena.getNextArena());
+                p.sendMessage(Main.prefix + TimeUntilStart + " §aseconds until start! Next Arena is §5" + getArena.getNextArena());
             }
         }
         TimeUntilStart -= 1;

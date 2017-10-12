@@ -1,0 +1,7 @@
+author: tatemylove
+version: 1.0.0
+name: UHCBattles
+main: com.tatemylove.UHCBattles.Main
+commands:
+  battles:
+    usage: /<command>

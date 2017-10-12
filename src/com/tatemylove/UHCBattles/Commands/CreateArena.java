@@ -30,7 +30,7 @@ public class CreateArena {
     public static void setSpawns(Player p, String[] args, int id) {
         if (args.length == 3) {
             if (args[2].equalsIgnoreCase("blue")) {
-                World world = p.getLocation().getWorld();
+                String world = p.getLocation().getWorld().getName();
                 double x = p.getLocation().getX();
                 double y = p.getLocation().getY();
                 double z = p.getLocation().getZ();
@@ -43,7 +43,7 @@ public class CreateArena {
                 ArenaFile.reloadData();
 
             }else if (args[2].equalsIgnoreCase("red")){
-                World world = p.getLocation().getWorld();
+                String world = p.getLocation().getWorld().getName();
                 double x = p.getLocation().getX();
                 double y = p.getLocation().getY();
                 double z = p.getLocation().getZ();
