@@ -1,5 +1,6 @@
 package com.tatemylove.UHCBattles.Commands;
 
+import com.tatemylove.UHCBattles.Arena.SetLobby;
 import com.tatemylove.UHCBattles.Main;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -40,6 +41,12 @@ public class MainCommand implements CommandExecutor {
                     Main.WaitingPlayers.add(p);
                     p.sendMessage(Main.prefix + "§3You joined UHC");
                     plugin.startCountDown();
+                }
+            }
+            if(args[0].equalsIgnoreCase("setlobby")){
+                if(p.hasPermission("uhc.lobbyset")){
+                    SetLobby.setLobby(p);
+                    p.sendMessage(Main.prefix + "§aYou have set the lobby");
                 }
             }
         }

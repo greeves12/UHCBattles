@@ -12,18 +12,20 @@ public class UHC {
     public static HashMap<Player, String> Team = new HashMap<>();
     public static ArrayList<Player> redTeam = new ArrayList<>();
     public static ArrayList<Player> blueTeam = new ArrayList<>();
+    public static ArrayList<Player> pls = Main.PlayingPlayers;
 
     public static void AssignTeam(String id) {
         if (BaseArena.states == BaseArena.ArenaStates.Started) {
             redTeam.clear();
             blueTeam.clear();
             Team.clear();
+            pls.clear();
 
             if (ArenaFile.getData().contains("Arenas." + id + ".Name")) {
                 Main.PlayingPlayers.addAll(Main.WaitingPlayers);
                 Main.WaitingPlayers.clear();
                 for (int assign = 0; assign < Main.PlayingPlayers.size(); assign++) {
-                    Player p = (Player) Main.PlayingPlayers.get(assign);
+                    Player p = Main.PlayingPlayers.get(assign);
 
                     if (redTeam.size() < blueTeam.size()) {
                         redTeam.add(p);
@@ -41,9 +43,11 @@ public class UHC {
                     }
                     if (redTeam.contains(p)) {
                         Team.put(p, "Red");
-                    } else if(blueTeam.contains(p)){
+                    } else {
                         Team.put(p, "Blue");
                     }
+
+                    continue;
                 }
             }
         }
@@ -52,13 +56,15 @@ public class UHC {
     public static void startUHC(String id){
         if(ArenaFile.getData().contains("Arenas." + id + ".Name")) {
             if(BaseArena.states == BaseArena.ArenaStates.Started){
-                for(Player p : Main.PlayingPlayers){
-                    if(blueTeam.contains(p)){
-                        p.sendMessage(Main.prefix + "§bYou have joined the blue team");
-                        p.teleport(getArena.getBlueSpawn());
-                    }else if (redTeam.contains(p)){
-                        p.sendMessage(Main.prefix + "§cYou have joined the red team");
+                for(int ID = 0; ID < pls.size(); ID++){
+                    final Player p = pls.get(ID);
+
+                    if(redTeam.contains(p)){
                         p.teleport(getArena.getRedSpawn());
+                        p.sendMessage(Main.prefix + "§cYou have joined the red team!");
+                    }else if(blueTeam.contains(p)){
+                        p.teleport(getArena.getBlueSpawn());
+                        p.sendMessage(Main.prefix + "§bYou have joined the blue team!");
                     }
                 }
 

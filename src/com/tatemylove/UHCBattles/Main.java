@@ -5,6 +5,7 @@ import com.tatemylove.UHCBattles.Arena.GameCountDown;
 import com.tatemylove.UHCBattles.Commands.MainCommand;
 import com.tatemylove.UHCBattles.Files.AchievementFile;
 import com.tatemylove.UHCBattles.Files.ArenaFile;
+import com.tatemylove.UHCBattles.Files.LobbyFile;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +26,7 @@ public class Main extends JavaPlugin {
 
         ArenaFile.setup(this);
         AchievementFile.setup(this);
+        LobbyFile.setup(this);
 
         MainCommand cmd = new MainCommand(this);
         getCommand("battles").setExecutor(cmd);

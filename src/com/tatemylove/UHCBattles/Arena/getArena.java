@@ -53,7 +53,7 @@ public class getArena {
         final double y;
         final double z;
         final World world;
-        world = Bukkit.getWorld("Arenas." + getNextArena() + ".Spawns.Red.World");
+        world = Bukkit.getWorld(ArenaFile.getData().getString("Arenas." + getNextArena() + ".Spawns.Red.World"));
         x = ArenaFile.getData().getDouble("Arenas." + getNextArena() + ".Spawns.Red.X");
         y = ArenaFile.getData().getDouble("Arenas." + getNextArena() + ".Spawns.Red.Y");
         z = ArenaFile.getData().getDouble("Arenas." + getNextArena() + ".Spawns.Red.Z");

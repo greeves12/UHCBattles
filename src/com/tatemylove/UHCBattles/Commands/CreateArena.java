@@ -2,7 +2,6 @@ package com.tatemylove.UHCBattles.Commands;
 
 import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Main;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.TreeMap;
