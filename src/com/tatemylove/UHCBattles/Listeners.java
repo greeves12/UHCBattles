@@ -1,5 +1,6 @@
 package com.tatemylove.UHCBattles;
 
+import com.tatemylove.UHCBattles.Arena.GetArena;
 import com.tatemylove.UHCBattles.Arena.InternalCountDown;
 import com.tatemylove.UHCBattles.Arena.SetLobby;
 import com.tatemylove.UHCBattles.Arena.UHC;
@@ -67,6 +68,12 @@ public class Listeners implements Listener {
             }
             p.teleport(SetLobby.getLobby());
             p.sendMessage(Main.prefix + "§bYou died and have been teleported back to the lobby!");
+        }
+        if(UHC.redTeam.size() == 0){
+            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
+        }
+        if(UHC.blueTeam.size() == 0){
+            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
         }
     }
     @EventHandler

@@ -8,7 +8,7 @@ import org.bukkit.World;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class getArena {
+public class GetArena {
     public static int CurrentArena;
 
     public static int chooseNextMap()

@@ -26,6 +26,9 @@ public class Main extends JavaPlugin {
     public void onEnable(){
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
 
+        BaseArena.states = BaseArena.ArenaStates.Countdown;
+        startCountDown();
+
         ArenaFile.setup(this);
         AchievementFile.setup(this);
         LobbyFile.setup(this);
@@ -41,6 +44,7 @@ public class Main extends JavaPlugin {
     public void stopCountDown(){
         getServer().getScheduler().cancelTask(startCountDownId);
     }
+
     public void restartCountDown(){
         stopCountDown();
         startCountDown();
@@ -53,6 +57,7 @@ public class Main extends JavaPlugin {
     public void stopCountDownInternal(){
         getServer().getScheduler().cancelTask(startCountDownInternal);
     }
+
     public void restartCountDownInternal(){
         stopCountDownInternal();
         startCountDownInternal();

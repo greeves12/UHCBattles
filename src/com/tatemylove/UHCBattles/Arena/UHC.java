@@ -39,15 +39,13 @@ public class UHC {
                         if (TeamID == 0) {
                             redTeam.add(p);
                         } else {
-                            blueTeam.add(p);
-                        }
+                         }
                     }
                     if (redTeam.contains(p)) {
                         Team.put(p, "Red");
                     } else {
                         Team.put(p, "Blue");
                     }
-
                     continue;
                 }
             }
@@ -59,15 +57,14 @@ public class UHC {
             if(BaseArena.states == BaseArena.ArenaStates.Started){
                 for(int ID = 0; ID < pls.size(); ID++){
                     final Player p = pls.get(ID);
-
                     if(redTeam.contains(p)){
-                        p.teleport(getArena.getRedSpawn());
+                        p.teleport(GetArena.getRedSpawn());
                         p.sendMessage(Main.prefix + "§cYou have joined the §lRED §cteam!");
                         p.sendMessage(Main.prefix + "§b§lYou have §a§l" + time + " minutes§b§l to get prepared!");
                         p.setFoodLevel(20);
                         p.setHealth(20);
                     }else if(blueTeam.contains(p)){
-                        p.teleport(getArena.getBlueSpawn());
+                        p.teleport(GetArena.getBlueSpawn());
                         p.sendMessage(Main.prefix + "§3You have joined the §lBLUE team!");
                         p.sendMessage(Main.prefix + "§b§lYou have §a§l" + time + " minutes§b§l to get prepared!");
                         p.setFoodLevel(20);
@@ -76,7 +73,29 @@ public class UHC {
                 }
             }
         }
+    }
 
+    public static void endUHC(String id){
+        if(ArenaFile.getData().contains("Arenas." + id + ".Name")){
+            if(BaseArena.states == BaseArena.ArenaStates.Started){
+                for (int ID = 0; ID < pls.size(); ID++) {
+                    final Player p = pls.get(ID);
+                    if (redTeam.size() < blueTeam.size()) {
+                        p.sendMessage(Main.prefix + "Blue team has won!");
+                    }
+                    if(blueTeam.size() < redTeam.size()){
+                        p.sendMessage(Main.prefix + "Red team has won!");
+                    }
+                    p.teleport(SetLobby.getLobby());
+                }
+                BaseArena.states = BaseArena.ArenaStates.Countdown;
+                Main.PlayingPlayers.clear();
+                redTeam.clear();
+                blueTeam.clear();
+                pls.clear();
+                Team.clear();
+            }
+        }
     }
 }
 

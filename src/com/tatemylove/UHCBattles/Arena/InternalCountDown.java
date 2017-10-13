@@ -2,6 +2,7 @@ package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Main;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -22,9 +23,16 @@ public class InternalCountDown extends BukkitRunnable {
             if(timeuntilstart == 0){
                 for(Player p : Main.PlayingPlayers){
                     p.sendMessage(Main.prefix + "§5Combat has started!!");
-                    p.teleport((Location) p.getWorld().getHighestBlockAt(p.getLocation()));
+                    Location loc = new Location(p.getWorld(),p.getLocation().getX(),p.getLocation().getY(),p.getLocation().getBlockZ());
+                    loc.setY(loc.getWorld().getHighestBlockYAt(loc));
+                    p.teleport(loc);
                 }
                 plugin.stopCountDownInternal();
+            }
+            if(timeuntilstart % 60 == 0){
+                for(Player p : Main.PlayingPlayers){
+                    p.sendMessage(Main.prefix + timeuntilstart/60 + " minutes left to prepare!");
+                }
             }
         }
         timeuntilstart -= 1;

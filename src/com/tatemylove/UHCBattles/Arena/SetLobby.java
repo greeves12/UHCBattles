@@ -14,7 +14,6 @@ public class SetLobby {
 
 
     public static void setLobby(Player p){
-
         String world = p.getLocation().getWorld().getName();
         double x = p.getLocation().getX();
         double y = p.getLocation().getY();

@@ -18,13 +18,11 @@ public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         Player p = (Player) sender;
-
         if(args.length >= 1){
             if(args[0].equalsIgnoreCase("create")) {
                 if (p.hasPermission("uhc.create")) {
                     if (args.length == 2) {
                         String name = args[1];
-
                         CreateArena.createArena(p, name);
                     }
                 }
@@ -33,7 +31,6 @@ public class MainCommand implements CommandExecutor {
                 if(p.hasPermission("uhc.set")){
                     String k = args[1];
                     int id = Integer.parseInt(k);
-
                     CreateArena.setSpawns(p, args, id);
                 }
             }
@@ -41,7 +38,6 @@ public class MainCommand implements CommandExecutor {
                 if(p.hasPermission("uhc.join")){
                     Main.WaitingPlayers.add(p);
                     p.sendMessage(Main.prefix + "§3You joined UHC");
-                    plugin.startCountDown();
                 }
             }
             if(args[0].equalsIgnoreCase("setlobby")){
@@ -51,10 +47,11 @@ public class MainCommand implements CommandExecutor {
                 }
             }
             if(args[0].equalsIgnoreCase("goup")){
-                p.teleport((Location) p.getWorld().getHighestBlockAt(p.getLocation()));
+                Location loc = new Location(p.getWorld(),p.getLocation().getX(),p.getLocation().getY(),p.getLocation().getBlockZ());
+                loc.setY(loc.getWorld().getHighestBlockYAt(loc));
+                p.teleport(loc);
             }
         }
-
         return true;
     }
 }
