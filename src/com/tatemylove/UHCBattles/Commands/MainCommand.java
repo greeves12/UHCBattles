@@ -2,6 +2,7 @@ package com.tatemylove.UHCBattles.Commands;
 
 import com.tatemylove.UHCBattles.Arena.SetLobby;
 import com.tatemylove.UHCBattles.Main;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,6 +49,9 @@ public class MainCommand implements CommandExecutor {
                     SetLobby.setLobby(p);
                     p.sendMessage(Main.prefix + "§aYou have set the lobby");
                 }
+            }
+            if(args[0].equalsIgnoreCase("goup")){
+                p.teleport((Location) p.getWorld().getHighestBlockAt(p.getLocation()));
             }
         }
 

@@ -13,6 +13,7 @@ public class UHC {
     public static ArrayList<Player> redTeam = new ArrayList<>();
     public static ArrayList<Player> blueTeam = new ArrayList<>();
     public static ArrayList<Player> pls = Main.PlayingPlayers;
+    public static int time = InternalCountDown.timeuntilstart/60;
 
     public static void AssignTeam(String id) {
         if (BaseArena.states == BaseArena.ArenaStates.Started) {
@@ -61,13 +62,18 @@ public class UHC {
 
                     if(redTeam.contains(p)){
                         p.teleport(getArena.getRedSpawn());
-                        p.sendMessage(Main.prefix + "§cYou have joined the red team!");
+                        p.sendMessage(Main.prefix + "§cYou have joined the §lRED §cteam!");
+                        p.sendMessage(Main.prefix + "§b§lYou have §a§l" + time + " minutes§b§l to get prepared!");
+                        p.setFoodLevel(20);
+                        p.setHealth(20);
                     }else if(blueTeam.contains(p)){
                         p.teleport(getArena.getBlueSpawn());
-                        p.sendMessage(Main.prefix + "§bYou have joined the blue team!");
+                        p.sendMessage(Main.prefix + "§3You have joined the §lBLUE team!");
+                        p.sendMessage(Main.prefix + "§b§lYou have §a§l" + time + " minutes§b§l to get prepared!");
+                        p.setFoodLevel(20);
+                        p.setHealth(20);
                     }
                 }
-
             }
         }
 

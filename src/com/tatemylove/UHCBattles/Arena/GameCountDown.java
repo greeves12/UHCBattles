@@ -23,7 +23,7 @@ public class GameCountDown extends BukkitRunnable{
     public void run() {
         arena.add(ArenaFile.getData().getString("Arenas." + getArena.getNextArena() + ".Name"));
         if(TimeUntilStart == 0){
-            if(Main.WaitingPlayers.size() < Main.min_players){
+            if(Main.WaitingPlayers.size() <= Main.min_players){
                 plugin.restartCountDown();
                 for(Player p : Main.WaitingPlayers){
                     p.sendMessage(Main.prefix + "§cNot enough players, restarting countdown");
@@ -34,6 +34,8 @@ public class GameCountDown extends BukkitRunnable{
             UHC.AssignTeam(Integer.toString(getArena.getCurrentArena()));
             UHC.startUHC(Integer.toString(getArena.getCurrentArena()));
             arena.clear();
+            plugin.stopCountDown();
+            plugin.startCountDownInternal();
         }
         if((TimeUntilStart % 10 == 0) || (TimeUntilStart < 0)){
             for(Player p : Main.WaitingPlayers){
