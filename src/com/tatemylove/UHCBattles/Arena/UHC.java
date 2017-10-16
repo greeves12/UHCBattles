@@ -4,6 +4,7 @@ import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Main;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.io.ByteArrayOutputStream;
@@ -62,11 +63,13 @@ public class UHC {
                     if(redTeam.contains(p)){
                         p.teleport(GetArena.getRedSpawn());
                         p.sendMessage(Main.prefix + "§cYou have joined the §lRED §cteam!");
+                        p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
                     }else if(blueTeam.contains(p)){
                         p.teleport(GetArena.getBlueSpawn());
                         p.sendMessage(Main.prefix + "§bYou have joined the §3§lBLUE §bteam!");
+                        p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
                     }

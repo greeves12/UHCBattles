@@ -7,22 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1cf3339-ccdb-45ed-9886-b4b6c56a8bcb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/GameCountDown.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/GameCountDown.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/InternalCountDown.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/InternalCountDown.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/SetLobby.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/SetLobby.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/UHC.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/UHC.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/getArena.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Arena/getArena.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Commands/MainCommand.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Commands/MainCommand.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Listeners.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Listeners.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Main.class" afterPath="$PROJECT_DIR$/out/production/UHCBattles/com/tatemylove/UHCBattles/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UHCBattles.iml" afterPath="$PROJECT_DIR$/UHCBattles.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/GameCountDown.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/GameCountDown.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/InternalCountDown.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/InternalCountDown.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/UHC.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/UHC.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Commands/MainCommand.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Commands/MainCommand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Listeners.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Listeners.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Main.java" afterPath="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,10 +24,10 @@
       <file leaf-file-name="Listeners.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Listeners.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
-              <caret line="78" column="38" lean-forward="true" selection-start-line="78" selection-start-column="38" selection-end-line="78" selection-end-column="38" />
+            <state relative-caret-position="2825">
+              <caret line="136" column="39" lean-forward="false" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
               <folding>
-                <marker date="1508176906672" expanded="true" signature="3289:3307" ph="{...}" />
+                <marker date="1508187689234" expanded="true" signature="3592:3610" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -72,7 +58,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
               <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,8 +88,8 @@
       <file leaf-file-name="UHC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/UHC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="91" column="30" lean-forward="false" selection-start-line="91" selection-start-column="30" selection-end-line="91" selection-end-column="30" />
+            <state relative-caret-position="810">
+              <caret line="65" column="55" lean-forward="false" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -112,7 +100,7 @@
       <file leaf-file-name="ThisPlugin.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tatemylove/UHCBattles/ThisPlugin/ThisPlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
+            <state relative-caret-position="150">
               <caret line="8" column="65" lean-forward="false" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
               <folding>
                 <element signature="e#170#171#0" expanded="true" />
@@ -174,10 +162,10 @@
         <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/getArena.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/SetLobby.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Commands/MainCommand.java" />
-        <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/UHC.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/InternalCountDown.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Main.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/GameCountDown.java" />
+        <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/UHC.java" />
         <option value="$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Listeners.java" />
       </list>
     </option>
@@ -202,6 +190,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -292,9 +282,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -596,7 +584,7 @@
         <state relative-caret-position="125">
           <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
           <folding>
-            <marker date="1508176906672" expanded="true" signature="3289:3307" ph="{...}" />
+            <marker date="1508187689234" expanded="true" signature="3592:3610" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -613,10 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="16" column="75" lean-forward="false" selection-start-line="16" selection-start-column="75" selection-end-line="16" selection-end-column="75" />
-          <folding>
-            <element signature="e#753#754#0" expanded="false" />
-            <element signature="e#788#789#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -643,7 +627,7 @@
         <state relative-caret-position="100">
           <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
           <folding>
-            <marker date="1508176906672" expanded="true" signature="3289:3307" ph="{...}" />
+            <marker date="1508187689234" expanded="true" signature="3592:3610" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -689,10 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-          <folding>
-            <element signature="e#753#754#0" expanded="false" />
-            <element signature="e#788#789#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -734,7 +714,7 @@
         <state relative-caret-position="100">
           <caret line="4" column="3" lean-forward="true" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
           <folding>
-            <marker date="1508176906672" expanded="true" signature="3289:3307" ph="{...}" />
+            <marker date="1508187689234" expanded="true" signature="3592:3610" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -773,10 +753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding>
-            <element signature="e#753#754#0" expanded="false" />
-            <element signature="e#788#789#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -818,7 +794,7 @@
         <state relative-caret-position="100">
           <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
           <folding>
-            <marker date="1508176906672" expanded="true" signature="3289:3307" ph="{...}" />
+            <marker date="1508187689234" expanded="true" signature="3592:3610" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -878,10 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="10" column="14" lean-forward="false" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-          <folding>
-            <element signature="e#753#754#0" expanded="false" />
-            <element signature="e#788#789#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -889,7 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="725">
           <caret line="33" column="50" lean-forward="false" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -905,7 +876,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -949,19 +922,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/UHC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="91" column="30" lean-forward="false" selection-start-line="91" selection-start-column="30" selection-end-line="91" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tatemylove/UHCBattles/ThisPlugin/ThisPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
+        <state relative-caret-position="150">
           <caret line="8" column="65" lean-forward="false" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
           <folding>
             <element signature="e#170#171#0" expanded="true" />
@@ -970,12 +933,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Arena/UHC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="65" column="55" lean-forward="false" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tatemylove/UHCBattles/Listeners.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="78" column="38" lean-forward="true" selection-start-line="78" selection-start-column="38" selection-end-line="78" selection-end-column="38" />
+        <state relative-caret-position="2825">
+          <caret line="136" column="39" lean-forward="false" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
           <folding>
-            <marker date="1508176906672" expanded="true" signature="3289:3307" ph="{...}" />
+            <marker date="1508187689234" expanded="true" signature="3592:3610" ph="{...}" />
           </folding>
         </state>
       </provider>

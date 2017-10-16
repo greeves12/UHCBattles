@@ -2,20 +2,28 @@ package com.tatemylove.UHCBattles;
 
 import com.tatemylove.UHCBattles.Arena.*;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Listeners implements Listener {
     @EventHandler
@@ -58,9 +66,9 @@ public class Listeners implements Listener {
         Player p = e.getPlayer();
         if(Main.PlayingPlayers.contains(p)){
             if(InternalCountDown.timeuntilstart > 0){
-                e.setCancelled(true);
-            }else if(InternalCountDown.timeuntilstart == 0){
                 e.setCancelled(false);
+            }else if(InternalCountDown.timeuntilstart == 0){
+                e.setCancelled(true);
             }
         }
     }
@@ -120,5 +128,22 @@ public class Listeners implements Listener {
             e.setJoinMessage(null);
         }
     }
-
+    @EventHandler
+    public void leavesChange(LeavesDecayEvent e){
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("§5Restores 4 hearts");
+        ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, 1);
+        ItemMeta goldenMeta = goldenApple.getItemMeta();
+        goldenMeta.setDisplayName("§2§lUHC§f§l-§8§lApple");
+        goldenMeta.setLore(lore);
+        goldenApple.setItemMeta(goldenMeta);
+        int i = ThreadLocalRandom.current().nextInt(100) + 1;
+        if(e.getBlock().getType() == Material.LEAVES) {
+            if (i > 0 && i <= 10) {
+                Block block = e.getBlock();
+                block.setType(Material.AIR);
+                block.getWorld().dropItemNaturally(block.getLocation(), goldenApple);
+            }
+        }
+    }
 }
