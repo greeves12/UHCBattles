@@ -18,7 +18,7 @@ public class Main extends JavaPlugin {
     public static String prefix = "§6[UHCBattles] ";
     public static ArrayList<Player> WaitingPlayers = new ArrayList<>();
     public static ArrayList<Player> PlayingPlayers = new ArrayList<>();
-    public static int min_players = 0;
+    public static int min_players = 1;
     public static int max_players = 10;
     public static int startCountDownId;
     public static int startCountDownInternal;
@@ -35,6 +35,8 @@ public class Main extends JavaPlugin {
 
         MainCommand cmd = new MainCommand(this);
         getCommand("battles").setExecutor(cmd);
+
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
     public void startCountDown(){
         startCountDownId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new GameCountDown(this), 0L, 20L);

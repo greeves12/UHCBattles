@@ -2,11 +2,16 @@ package com.tatemylove.UHCBattles.Commands;
 
 import com.tatemylove.UHCBattles.Arena.SetLobby;
 import com.tatemylove.UHCBattles.Main;
+import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class MainCommand implements CommandExecutor {
 
@@ -34,12 +39,6 @@ public class MainCommand implements CommandExecutor {
                     CreateArena.setSpawns(p, args, id);
                 }
             }
-            if(args[0].equalsIgnoreCase("join")){
-                if(p.hasPermission("uhc.join")){
-                    Main.WaitingPlayers.add(p);
-                    p.sendMessage(Main.prefix + "§3You joined UHC");
-                }
-            }
             if(args[0].equalsIgnoreCase("setlobby")){
                 if(p.hasPermission("uhc.lobbyset")){
                     SetLobby.setLobby(p);
@@ -50,6 +49,19 @@ public class MainCommand implements CommandExecutor {
                 Location loc = new Location(p.getWorld(),p.getLocation().getX(),p.getLocation().getY(),p.getLocation().getBlockZ());
                 loc.setY(loc.getWorld().getHighestBlockYAt(loc));
                 p.teleport(loc);
+            }
+            if(args[0].equalsIgnoreCase("leave")){
+                if(!Main.PlayingPlayers.contains(p)){
+                    ByteArrayOutputStream b = new ByteArrayOutputStream();
+                    DataOutputStream out = new DataOutputStream(b);
+                    try{
+                        out.writeUTF("Connect");
+                        out.writeUTF("Lobby");
+                    }catch (IOException e){
+
+                    }
+                    p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
+                }
             }
         }
         return true;

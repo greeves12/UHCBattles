@@ -2,8 +2,13 @@ package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Main;
+import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -17,10 +22,6 @@ public class UHC {
 
     public static void AssignTeam(String id) {
         if (BaseArena.states == BaseArena.ArenaStates.Started) {
-            redTeam.clear();
-            blueTeam.clear();
-            Team.clear();
-            pls.clear();
 
             if (ArenaFile.getData().contains("Arenas." + id + ".Name")) {
                 Main.PlayingPlayers.addAll(Main.WaitingPlayers);
@@ -39,6 +40,7 @@ public class UHC {
                         if (TeamID == 0) {
                             redTeam.add(p);
                         } else {
+                            blueTeam.add(p);
                          }
                     }
                     if (redTeam.contains(p)) {
@@ -60,13 +62,11 @@ public class UHC {
                     if(redTeam.contains(p)){
                         p.teleport(GetArena.getRedSpawn());
                         p.sendMessage(Main.prefix + "§cYou have joined the §lRED §cteam!");
-                        p.sendMessage(Main.prefix + "§b§lYou have §a§l" + time + " minutes§b§l to get prepared!");
                         p.setFoodLevel(20);
                         p.setHealth(20);
                     }else if(blueTeam.contains(p)){
                         p.teleport(GetArena.getBlueSpawn());
-                        p.sendMessage(Main.prefix + "§3You have joined the §lBLUE team!");
-                        p.sendMessage(Main.prefix + "§b§lYou have §a§l" + time + " minutes§b§l to get prepared!");
+                        p.sendMessage(Main.prefix + "§bYou have joined the §3§lBLUE §bteam!");
                         p.setFoodLevel(20);
                         p.setHealth(20);
                     }
@@ -86,7 +86,16 @@ public class UHC {
                     if(blueTeam.size() < redTeam.size()){
                         p.sendMessage(Main.prefix + "Red team has won!");
                     }
-                    p.teleport(SetLobby.getLobby());
+                    ByteArrayOutputStream b = new ByteArrayOutputStream();
+                    DataOutputStream out = new DataOutputStream(b);
+                    try{
+                        out.writeUTF("Connect");
+                        out.writeUTF("Lobby");
+                    }catch (IOException e){
+
+                    }
+                    p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
+                    Bukkit.shutdown();
                 }
                 BaseArena.states = BaseArena.ArenaStates.Countdown;
                 Main.PlayingPlayers.clear();
