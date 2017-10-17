@@ -29,20 +29,21 @@ public class InternalCountDown extends BukkitRunnable {
                 }
                 plugin.stopCountDownInternal();
             }
+            if(timeuntilstart > 60) {
             if(timeuntilstart % 60 == 0){
-                if(timeuntilstart > 0) {
                     for (Player p : Main.PlayingPlayers) {
                         p.sendMessage(Main.prefix + "§b§lYou have §a§l" + timeuntilstart / 60 + " minutes§b§l to get prepared!");
                     }
                 }
-                if(timeuntilstart < 0) {
+            }
+            if(timeuntilstart <= 60) {
+                if(timeuntilstart % 0 == 0) {
                     for (Player p : Main.PlayingPlayers) {
                         p.sendMessage(Main.prefix + "§b§lYou have §a§l" + timeuntilstart + " seconds§b§l to get prepared!");
                     }
                 }
             }
         }
-
         timeuntilstart -= 1;
     }
 }

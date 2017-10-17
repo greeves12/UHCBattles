@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,6 +24,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Listeners implements Listener {
@@ -84,7 +87,7 @@ public class Listeners implements Listener {
             DataOutputStream out = new DataOutputStream(b);
             try{
                 out.writeUTF("Connect");
-                out.writeUTF("Lobby");
+                out.writeUTF("lobby");
             }catch (IOException ei){
 
             }
@@ -114,13 +117,14 @@ public class Listeners implements Listener {
             p.sendMessage(Main.prefix + "§3To go back to hub type §5/battles leave");
             p.sendMessage("§c(This is only available before the game starts)");
             e.setJoinMessage(Main.prefix + "§b" + p.getName() + " §ahas joined the queue");
+            p.teleport(SetLobby.getLobby());
         }
         if(BaseArena.states == BaseArena.ArenaStates.Started){
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(b);
             try{
                 out.writeUTF("Connect");
-                out.writeUTF("Lobby");
+                out.writeUTF("lobby");
             }catch (IOException ei){
 
             }
@@ -131,7 +135,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void leavesChange(LeavesDecayEvent e){
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("§5Restores 4 hearts");
+        lore.add("§5Restores a lil bit of health");
         ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, 1);
         ItemMeta goldenMeta = goldenApple.getItemMeta();
         goldenMeta.setDisplayName("§2§lUHC§f§l-§8§lApple");
@@ -144,6 +148,24 @@ public class Listeners implements Listener {
                 block.setType(Material.AIR);
                 block.getWorld().dropItemNaturally(block.getLocation(), goldenApple);
             }
+        }
+    }
+    @EventHandler
+    public void chatChange(AsyncPlayerChatEvent e){
+        Player p = e.getPlayer();
+        String message = e.getMessage();
+        if(Main.PlayingPlayers.contains(p)){
+            if(UHC.blueTeam.contains(p)){
+                for(Player pp : UHC.blueTeam){
+                    pp.sendMessage(p.getName() + message);
+                }
+            }
+            if(UHC.redTeam.contains(p)){
+                for(Player pp : UHC.redTeam){
+                    pp.sendMessage(p.getName() + message);
+                }
+            }
+            e.setCancelled(true);
         }
     }
 }

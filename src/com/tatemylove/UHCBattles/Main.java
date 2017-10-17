@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Main extends JavaPlugin {
 
-    public static String prefix = "§6[UHCBattles] ";
+    public static String prefix = "§6§l[§b§lU§c§lH§a§lC§f§l-§5§lB§3§la§2§lt§d§lt§8§ll§7§le§a§ls§6§l] ";
     public static ArrayList<Player> WaitingPlayers = new ArrayList<>();
     public static ArrayList<Player> PlayingPlayers = new ArrayList<>();
     public static int min_players = 1;
@@ -60,8 +60,4 @@ public class Main extends JavaPlugin {
         getServer().getScheduler().cancelTask(startCountDownInternal);
     }
 
-    public void restartCountDownInternal(){
-        stopCountDownInternal();
-        startCountDownInternal();
-    }
 }

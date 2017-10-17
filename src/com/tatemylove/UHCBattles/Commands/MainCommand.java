@@ -56,7 +56,7 @@ public class MainCommand implements CommandExecutor {
                     DataOutputStream out = new DataOutputStream(b);
                     try{
                         out.writeUTF("Connect");
-                        out.writeUTF("Lobby");
+                        out.writeUTF("lobby");
                     }catch (IOException e){
 
                     }

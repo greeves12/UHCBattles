@@ -4,8 +4,12 @@ import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Main;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -61,21 +65,44 @@ public class UHC {
                 for(int ID = 0; ID < pls.size(); ID++){
                     final Player p = pls.get(ID);
                     if(redTeam.contains(p)){
+                        p.getInventory().clear();
+
                         p.teleport(GetArena.getRedSpawn());
                         p.sendMessage(Main.prefix + "§cYou have joined the §lRED §cteam!");
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
+
+                        Color c = Color.fromRGB(255, 0, 0);
+                        p.getInventory().setHelmet(getColorArmor(Material.LEATHER_HELMET, c));
+                        p.getInventory().setChestplate(getColorArmor(Material.LEATHER_CHESTPLATE, c));
+                        p.getInventory().setLeggings(getColorArmor(Material.LEATHER_LEGGINGS, c));
+                        p.getInventory().setBoots(getColorArmor(Material.LEATHER_BOOTS, c));
                     }else if(blueTeam.contains(p)){
+                        p.getInventory().clear();
+
+                        Color c = Color.fromRGB(0,0,255);
                         p.teleport(GetArena.getBlueSpawn());
                         p.sendMessage(Main.prefix + "§bYou have joined the §3§lBLUE §bteam!");
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
+
+                        p.getInventory().setHelmet(getColorArmor(Material.LEATHER_HELMET, c));
+                        p.getInventory().setChestplate(getColorArmor(Material.LEATHER_CHESTPLATE, c));
+                        p.getInventory().setLeggings(getColorArmor(Material.LEATHER_LEGGINGS, c));
+                        p.getInventory().setBoots(getColorArmor(Material.LEATHER_BOOTS, c));
                     }
                 }
             }
         }
+    }
+    private static ItemStack getColorArmor(Material m, Color c) {
+        ItemStack i = new ItemStack(m, 1);
+        LeatherArmorMeta meta = (LeatherArmorMeta) i.getItemMeta();
+        meta.setColor(c);
+        i.setItemMeta(meta);
+        return i;
     }
 
     public static void endUHC(String id){
@@ -93,7 +120,7 @@ public class UHC {
                     DataOutputStream out = new DataOutputStream(b);
                     try{
                         out.writeUTF("Connect");
-                        out.writeUTF("Lobby");
+                        out.writeUTF("lobby");
                     }catch (IOException e){
 
                     }
