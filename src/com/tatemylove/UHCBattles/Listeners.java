@@ -38,12 +38,7 @@ public class Listeners implements Listener {
         if(Main.WaitingPlayers.contains(p)){
             Main.WaitingPlayers.remove(p);
         }
-        if(UHC.blueTeam.size() == 0){
-            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
-        }
-        if(UHC.redTeam.size() == 0){
-            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
-        }
+
         SendCoolMessages.clearTitleAndSubtitle(p);
         e.setQuitMessage(null);
 
@@ -108,12 +103,7 @@ public class Listeners implements Listener {
             p.sendMessage(Main.prefix + "§cYou have died and are being teleported back to the Hub");
             p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
         }
-        if(UHC.redTeam.size() == 0){
-            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
-        }
-        if(UHC.blueTeam.size() == 0){
-            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
-        }
+        UHC.endUHC();
     }
     @EventHandler
     public void heathRegen(EntityRegainHealthEvent e){

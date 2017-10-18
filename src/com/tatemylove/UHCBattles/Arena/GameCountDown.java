@@ -36,7 +36,7 @@ public class GameCountDown extends BukkitRunnable{
                 UHC.startUHC(Integer.toString(GetArena.getCurrentArena()));
                 plugin.stopCountDown();
                 plugin.startCountDownInternal();
-
+                BaseArena.states = BaseArena.ArenaStates.Started;
             }
             if ((TimeUntilStart % 10 == 0) || (TimeUntilStart < 0)) {
                 for (Player p : Main.WaitingPlayers) {

@@ -23,7 +23,7 @@ public class UHC {
     public static ArrayList<Player> redTeam = new ArrayList<>();
     public static ArrayList<Player> blueTeam = new ArrayList<>();
     public static ArrayList<Player> pls = Main.PlayingPlayers;
-    public static int time = InternalCountDown.timeuntilstart/60;
+    public static int time = InternalCountDown.timeuntilstart / 60;
 
     public static void AssignTeam(String id) {
         if (BaseArena.states == BaseArena.ArenaStates.Started) {
@@ -46,7 +46,7 @@ public class UHC {
                             redTeam.add(p);
                         } else {
                             blueTeam.add(p);
-                         }
+                        }
                     }
                     if (redTeam.contains(p)) {
                         Team.put(p, "Red");
@@ -59,12 +59,12 @@ public class UHC {
         }
     }
 
-    public static void startUHC(String id){
-        if(ArenaFile.getData().contains("Arenas." + id + ".Name")) {
-            if(BaseArena.states == BaseArena.ArenaStates.Started){
-                for(int ID = 0; ID < pls.size(); ID++){
+    public static void startUHC(String id) {
+        if (ArenaFile.getData().contains("Arenas." + id + ".Name")) {
+            if (BaseArena.states == BaseArena.ArenaStates.Started) {
+                for (int ID = 0; ID < pls.size(); ID++) {
                     final Player p = pls.get(ID);
-                    if(redTeam.contains(p)){
+                    if (redTeam.contains(p)) {
                         p.getInventory().clear();
 
                         p.teleport(GetArena.getRedSpawn());
@@ -80,10 +80,10 @@ public class UHC {
                         p.getInventory().setChestplate(getColorArmor(Material.LEATHER_CHESTPLATE, c));
                         p.getInventory().setLeggings(getColorArmor(Material.LEATHER_LEGGINGS, c));
                         p.getInventory().setBoots(getColorArmor(Material.LEATHER_BOOTS, c));
-                    }else if(blueTeam.contains(p)){
+                    } else if (blueTeam.contains(p)) {
                         p.getInventory().clear();
 
-                        Color c = Color.fromRGB(0,0,255);
+                        Color c = Color.fromRGB(0, 0, 255);
                         p.teleport(GetArena.getBlueSpawn());
                         p.sendMessage(Main.prefix + "§bYou have joined the §3§lBLUE §bteam!");
                         p.setGameMode(GameMode.SURVIVAL);
@@ -101,6 +101,7 @@ public class UHC {
             }
         }
     }
+
     private static ItemStack getColorArmor(Material m, Color c) {
         ItemStack i = new ItemStack(m, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) i.getItemMeta();
@@ -109,36 +110,26 @@ public class UHC {
         return i;
     }
 
-    public static void endUHC(String id){
-        if(ArenaFile.getData().contains("Arenas." + id + ".Name")){
-            if(BaseArena.states == BaseArena.ArenaStates.Started){
-                for (int ID = 0; ID < pls.size(); ID++) {
-                    final Player p = pls.get(ID);
+    public static void endUHC() {
+
+                for (Player p : Main.PlayingPlayers) {
                     if (redTeam.size() < blueTeam.size()) {
                         p.sendMessage(Main.prefix + "Blue team has won!");
                     }
-                    if(blueTeam.size() < redTeam.size()){
+                    if (blueTeam.size() < redTeam.size()) {
                         p.sendMessage(Main.prefix + "Red team has won!");
                     }
                     ByteArrayOutputStream b = new ByteArrayOutputStream();
                     DataOutputStream out = new DataOutputStream(b);
-                    try{
+                    try {
                         out.writeUTF("Connect");
                         out.writeUTF("lobby");
-                    }catch (IOException e){
+                    } catch (IOException e) {
 
                     }
                     p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
-                    Bukkit.shutdown();
                 }
-                BaseArena.states = BaseArena.ArenaStates.Countdown;
-                Main.PlayingPlayers.clear();
-                redTeam.clear();
-                blueTeam.clear();
-                pls.clear();
-                Team.clear();
+                Bukkit.shutdown();
+
             }
         }
-    }
-}
-
