@@ -36,7 +36,6 @@ public class GetArena {
     }
 
     public static Location getBlueSpawn(){
-
         final double x;
         final double y;
         final double z;

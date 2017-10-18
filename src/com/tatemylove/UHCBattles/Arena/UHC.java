@@ -2,8 +2,7 @@ package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Main;
-import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
-import org.bukkit.Bukkit;
+import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -11,9 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -58,7 +54,6 @@ public class UHC {
             }
         }
     }
-
     public static void startUHC(String id) {
         if (ArenaFile.getData().contains("Arenas." + id + ".Name")) {
             if (BaseArena.states == BaseArena.ArenaStates.Started) {
@@ -68,7 +63,7 @@ public class UHC {
                         p.getInventory().clear();
 
                         p.teleport(GetArena.getRedSpawn());
-                        p.sendMessage(Main.prefix + "§cYou have joined the §lRED §cteam!");
+                        SendCoolMessages.sendTitle(p,"§cYou have joined the §lRED §cteam!", 0, 2, 0);
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
@@ -85,7 +80,7 @@ public class UHC {
 
                         Color c = Color.fromRGB(0, 0, 255);
                         p.teleport(GetArena.getBlueSpawn());
-                        p.sendMessage(Main.prefix + "§bYou have joined the §3§lBLUE §bteam!");
+                        SendCoolMessages.sendTitle(p,"§bYou have joined the §3§lBLUE §bteam!", 0, 2, 0);
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
@@ -101,7 +96,6 @@ public class UHC {
             }
         }
     }
-
     private static ItemStack getColorArmor(Material m, Color c) {
         ItemStack i = new ItemStack(m, 1);
         LeatherArmorMeta meta = (LeatherArmorMeta) i.getItemMeta();
@@ -109,27 +103,16 @@ public class UHC {
         i.setItemMeta(meta);
         return i;
     }
-
     public static void endUHC() {
-
+                BaseArena.states = BaseArena.ArenaStates.Ended;
+                Main.startFinalCountdown();
                 for (Player p : Main.PlayingPlayers) {
                     if (redTeam.size() < blueTeam.size()) {
-                        p.sendMessage(Main.prefix + "Blue team has won!");
+                        SendCoolMessages.sendTitle(p, Main.prefix + "§3§lBlue §3team has won!", 1, 3, 0);
                     }
                     if (blueTeam.size() < redTeam.size()) {
-                        p.sendMessage(Main.prefix + "Red team has won!");
+                        SendCoolMessages.sendTitle(p,Main.prefix + "§c§lRed §cteam has won!", 1, 3, 0);
                     }
-                    ByteArrayOutputStream b = new ByteArrayOutputStream();
-                    DataOutputStream out = new DataOutputStream(b);
-                    try {
-                        out.writeUTF("Connect");
-                        out.writeUTF("lobby");
-                    } catch (IOException e) {
-
-                    }
-                    p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
-                }
-                Bukkit.shutdown();
-
             }
         }
+}

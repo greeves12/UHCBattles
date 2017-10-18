@@ -12,14 +12,8 @@ public class ActivePinger  extends BukkitRunnable {
     public void run() {
         if(BaseArena.states == BaseArena.ArenaStates.Started) {
             if (UHC.redTeam.size() == 0) {
-                for(Player p : Main.PlayingPlayers){
-                    p.sendMessage(Main.prefix + "§3Blue has won!");
-                }
                 UHC.endUHC();
             } else if (UHC.blueTeam.size() == 0){
-                for(Player p : Main.PlayingPlayers){
-                    p.sendMessage(Main.prefix + "§cRed has won!");
-                }
                 UHC.endUHC();
             }
         }

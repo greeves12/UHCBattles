@@ -38,10 +38,8 @@ public class Listeners implements Listener {
         if(Main.WaitingPlayers.contains(p)){
             Main.WaitingPlayers.remove(p);
         }
-
         SendCoolMessages.clearTitleAndSubtitle(p);
         e.setQuitMessage(null);
-
     }
     @EventHandler
     public void onHit(EntityDamageEvent e) {
@@ -62,7 +60,10 @@ public class Listeners implements Listener {
         Player p = (Player) e.getEntity();
         Player pp = (Player) e.getDamager();
         if(Main.PlayingPlayers.contains(p)){
-            if(e.getEntity() == pp){
+            if(UHC.redTeam.contains(p) && (UHC.redTeam.contains(pp))){
+                e.setCancelled(true);
+            }
+            if(UHC.blueTeam.contains(p) && (UHC.blueTeam.contains(pp))){
                 e.setCancelled(true);
             }
         }
@@ -90,7 +91,7 @@ public class Listeners implements Listener {
         Player pp = e.getEntity().getKiller();
         if(Main.PlayingPlayers.contains(p) && (Main.PlayingPlayers.contains(pp))){
             for(Player ps : Main.PlayingPlayers){
-                ps.sendMessage(Main.prefix + "§5Player: §c" + p.getName() + " §5has been killed by " + pp.getName());
+                ps.sendMessage(Main.prefix + "§bPlayer: §c" + p.getName() + " §dhas been killed by §c" + pp.getName());
             }
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(b);
@@ -103,7 +104,6 @@ public class Listeners implements Listener {
             p.sendMessage(Main.prefix + "§cYou have died and are being teleported back to the Hub");
             p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
         }
-        UHC.endUHC();
     }
     @EventHandler
     public void heathRegen(EntityRegainHealthEvent e){

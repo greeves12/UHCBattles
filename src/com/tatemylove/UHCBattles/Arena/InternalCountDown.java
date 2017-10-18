@@ -27,10 +27,10 @@ public class InternalCountDown extends BukkitRunnable {
                 for(Player p : Main.PlayingPlayers){
                     p.sendMessage(Main.prefix + "§5§lCombat has started!!");
 
-                    Location location = new Location(p.getWorld(), 0, 0, 0);
-                    location.setX( p.getLocation().getX() + Math.random() * 5);
-                    location.setZ( p.getLocation().getZ() + Math.random() * 5);
-                    location.setY(p.getWorld().getHighestBlockAt(location.getBlockX(), location.getBlockZ()).getY() );
+                    Location location = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
+                    location.setX( p.getLocation().getX() + Math.random() * 3);
+                    location.setZ( p.getLocation().getZ() + Math.random() * 3);
+                    location.setY(p.getWorld().getHighestBlockAt(location.getBlockX(), location.getBlockZ()).getY());
                     p.teleport(location);
 
                 }

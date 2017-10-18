@@ -4,7 +4,7 @@ public class BaseArena {
     public static ArenaStates states;
 
     public static enum ArenaStates {
-        Waiting, Started, Countdown
+        Ended, Started, Countdown
     }
 
     public static ArenaStates getStates(){

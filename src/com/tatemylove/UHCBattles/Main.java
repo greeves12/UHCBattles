@@ -2,10 +2,7 @@ package com.tatemylove.UHCBattles;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.tatemylove.UHCBattles.Arena.ActivePinger;
-import com.tatemylove.UHCBattles.Arena.BaseArena;
-import com.tatemylove.UHCBattles.Arena.GameCountDown;
-import com.tatemylove.UHCBattles.Arena.InternalCountDown;
+import com.tatemylove.UHCBattles.Arena.*;
 import com.tatemylove.UHCBattles.Commands.MainCommand;
 import com.tatemylove.UHCBattles.Files.AchievementFile;
 import com.tatemylove.UHCBattles.Files.ArenaFile;
@@ -26,6 +23,7 @@ public class Main extends JavaPlugin {
     public static int max_players = 10;
     public static int startCountDownId;
     public static int startCountDownInternal;
+    public static int finalcountdown;
     private ProtocolManager protocolManager;
 
 
@@ -37,6 +35,7 @@ public class Main extends JavaPlugin {
 
         ActivePinger pinger = new ActivePinger();
         pinger.runTaskTimerAsynchronously(this, 50, 5);
+
         ArenaFile.setup(this);
         AchievementFile.setup(this);
         LobbyFile.setup(this);
@@ -71,4 +70,8 @@ public class Main extends JavaPlugin {
         getServer().getScheduler().cancelTask(startCountDownInternal);
     }
 
+    public static void startFinalCountdown(){
+        finalcountdown = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new FinalCountdown(), 0L, 20L);
+        FinalCountdown.timeuntilend = 5;
+    }
 }
