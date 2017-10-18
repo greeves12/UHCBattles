@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class GameCountDown extends BukkitRunnable{
 
-    public static int TimeUntilStart = 30;
+    public static int TimeUntilStart;
 
     final ArrayList<String> arena = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class GameCountDown extends BukkitRunnable{
             }
             if ((TimeUntilStart % 10 == 0) || (TimeUntilStart < 0)) {
                 for (Player p : Main.WaitingPlayers) {
-                    p.sendMessage(Main.prefix + TimeUntilStart + " §aseconds until start! Next Arena is §5" + GetArena.getNextArena());
+                    p.sendMessage(Main.prefix + TimeUntilStart + " §aseconds until start!");
                 }
             }
             if (Main.WaitingPlayers.size() >= Main.min_players) {

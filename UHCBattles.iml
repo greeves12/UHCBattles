@@ -21,7 +21,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/BuildTools/BungeeCord.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/Servers/Test Server - 1.8/plugins/ProtocolLib.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

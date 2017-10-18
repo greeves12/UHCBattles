@@ -3,7 +3,10 @@ package com.tatemylove.UHCBattles.Arena;
 import com.tatemylove.UHCBattles.Files.ArenaFile;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;

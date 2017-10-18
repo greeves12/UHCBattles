@@ -2,6 +2,7 @@ package com.tatemylove.UHCBattles;
 
 import com.tatemylove.UHCBattles.Arena.*;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
+import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -10,10 +11,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -38,14 +38,27 @@ public class Listeners implements Listener {
         if(Main.WaitingPlayers.contains(p)){
             Main.WaitingPlayers.remove(p);
         }
+        if(UHC.blueTeam.size() == 0){
+            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
+        }
+        if(UHC.redTeam.size() == 0){
+            UHC.endUHC(Integer.toString(GetArena.getCurrentArena()));
+        }
+        SendCoolMessages.clearTitleAndSubtitle(p);
         e.setQuitMessage(null);
+
     }
     @EventHandler
     public void onHit(EntityDamageEvent e) {
         Player p = (Player) e.getEntity();
         if (Main.PlayingPlayers.contains(p)) {
             if (InternalCountDown.timeuntilstart > 0) {
-                e.setCancelled(true);
+                if (!(e.getCause() == EntityDamageEvent.DamageCause.FALL)) {
+                    e.setCancelled(true);
+                }
+            }
+            if(InternalCountDown.timeuntilstart < 0){
+                e.setCancelled(false);
             }
         }
     }
@@ -67,10 +80,11 @@ public class Listeners implements Listener {
     @EventHandler
     public void noBlockBreak(BlockBreakEvent e){
         Player p = e.getPlayer();
+        if(Main.WaitingPlayers.contains(p)){
+            e.setCancelled(true);
+        }
         if(Main.PlayingPlayers.contains(p)){
-            if(InternalCountDown.timeuntilstart > 0){
-                e.setCancelled(false);
-            }else if(InternalCountDown.timeuntilstart == 0){
+            if(InternalCountDown.timeuntilstart < 0){
                 e.setCancelled(true);
             }
         }
@@ -113,11 +127,12 @@ public class Listeners implements Listener {
         Player p = e.getPlayer();
         if (BaseArena.states == BaseArena.ArenaStates.Countdown) {
             Main.WaitingPlayers.add(p);
-            p.sendMessage(Main.prefix + "§aYou have joined UHC §5#1");
+            p.sendMessage(Main.prefix + "§aYou have joined UHC §dServer ID #" + ThisPlugin.getPlugin().getConfig().getInt("server-id"));
             p.sendMessage(Main.prefix + "§3To go back to hub type §5/battles leave");
-            p.sendMessage("§c(This is only available before the game starts)");
-            e.setJoinMessage(Main.prefix + "§b" + p.getName() + " §ahas joined the queue");
+            e.setJoinMessage(Main.prefix + "§b" + p.getName() + " §ehas joined the queue");
             p.teleport(SetLobby.getLobby());
+            p.getInventory().clear();
+            p.getInventory().setArmorContents(null);
         }
         if(BaseArena.states == BaseArena.ArenaStates.Started){
             ByteArrayOutputStream b = new ByteArrayOutputStream();
@@ -131,6 +146,8 @@ public class Listeners implements Listener {
             p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
             e.setJoinMessage(null);
         }
+        SendCoolMessages.TabHeaderAndFooter("", "", p);
+        SendCoolMessages.TabHeaderAndFooter("§2§lRecon§f§l-§4§lNetwork", "§dServer ID #" + ThisPlugin.getPlugin().getConfig().getInt("server-id"), p);
     }
     @EventHandler
     public void leavesChange(LeavesDecayEvent e){
@@ -157,15 +174,28 @@ public class Listeners implements Listener {
         if(Main.PlayingPlayers.contains(p)){
             if(UHC.blueTeam.contains(p)){
                 for(Player pp : UHC.blueTeam){
-                    pp.sendMessage(p.getName() + message);
+                    pp.sendMessage("§3[Blue] " + p.getName() + ": " + message);
                 }
             }
             if(UHC.redTeam.contains(p)){
                 for(Player pp : UHC.redTeam){
-                    pp.sendMessage(p.getName() + message);
+                    pp.sendMessage("§c[Red] " + p.getName() +": "+ message);
                 }
             }
             e.setCancelled(true);
         }
+    }
+    @EventHandler
+    public void keepArmor(InventoryClickEvent e){
+        Player p = (Player) e.getWhoClicked();
+        if(Main.PlayingPlayers.contains(p)){
+            if(e.getSlotType() == InventoryType.SlotType.ARMOR){
+                e.setCancelled(true);
+            }
+        }
+    }
+    @EventHandler
+    public void noHunger(FoodLevelChangeEvent e){
+        e.setCancelled(true);
     }
 }

@@ -72,6 +72,8 @@ public class UHC {
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
+                        p.setDisplayName("§c" + p.getName());
+                        p.setPlayerListName("§c" + p.getName());
 
                         Color c = Color.fromRGB(255, 0, 0);
                         p.getInventory().setHelmet(getColorArmor(Material.LEATHER_HELMET, c));
@@ -87,6 +89,8 @@ public class UHC {
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
+                        p.setDisplayName("§b" + p.getName());
+                        p.setPlayerListName("§b" + p.getName());
 
                         p.getInventory().setHelmet(getColorArmor(Material.LEATHER_HELMET, c));
                         p.getInventory().setChestplate(getColorArmor(Material.LEATHER_CHESTPLATE, c));

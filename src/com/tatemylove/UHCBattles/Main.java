@@ -1,5 +1,7 @@
 package com.tatemylove.UHCBattles;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import com.tatemylove.UHCBattles.Arena.BaseArena;
 import com.tatemylove.UHCBattles.Arena.GameCountDown;
 import com.tatemylove.UHCBattles.Arena.InternalCountDown;
@@ -7,6 +9,7 @@ import com.tatemylove.UHCBattles.Commands.MainCommand;
 import com.tatemylove.UHCBattles.Files.AchievementFile;
 import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Files.LobbyFile;
+import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,16 +25,21 @@ public class Main extends JavaPlugin {
     public static int max_players = 10;
     public static int startCountDownId;
     public static int startCountDownInternal;
+    private ProtocolManager protocolManager;
+
 
     public void onEnable(){
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
-
+        protocolManager = ProtocolLibrary.getProtocolManager();
         BaseArena.states = BaseArena.ArenaStates.Countdown;
         startCountDown();
 
         ArenaFile.setup(this);
         AchievementFile.setup(this);
         LobbyFile.setup(this);
+        ThisPlugin.getPlugin().getConfig().options().copyDefaults(true);
+        ThisPlugin.getPlugin().saveDefaultConfig();
+        ThisPlugin.getPlugin().reloadConfig();
 
         MainCommand cmd = new MainCommand(this);
         getCommand("battles").setExecutor(cmd);
@@ -40,7 +48,7 @@ public class Main extends JavaPlugin {
     }
     public void startCountDown(){
         startCountDownId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new GameCountDown(this), 0L, 20L);
-        GameCountDown.TimeUntilStart = 30;
+        GameCountDown.TimeUntilStart = 60;
     }
 
     public void stopCountDown(){

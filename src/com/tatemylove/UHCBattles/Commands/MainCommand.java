@@ -45,13 +45,8 @@ public class MainCommand implements CommandExecutor {
                     p.sendMessage(Main.prefix + "§aYou have set the lobby");
                 }
             }
-            if(args[0].equalsIgnoreCase("goup")){
-                Location loc = new Location(p.getWorld(),p.getLocation().getX(),p.getLocation().getY(),p.getLocation().getBlockZ());
-                loc.setY(loc.getWorld().getHighestBlockYAt(loc));
-                p.teleport(loc);
-            }
             if(args[0].equalsIgnoreCase("leave")){
-                if(!Main.PlayingPlayers.contains(p)){
+                if(Main.WaitingPlayers.contains(p)){
                     ByteArrayOutputStream b = new ByteArrayOutputStream();
                     DataOutputStream out = new DataOutputStream(b);
                     try{
