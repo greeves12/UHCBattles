@@ -38,7 +38,7 @@ public class FinalCountdown extends BukkitRunnable {
             }
             if (timeuntilend % 1 == 0) {
                 for (Player p : Main.PlayingPlayers) {
-                    p.sendMessage(Main.prefix + "§aGame has ended! Teleporting you back to the hub in " + timeuntilend);
+                    p.sendMessage(Main.prefix + "§aGame has ended! Teleporting you back to the hub in " + timeuntilend + " §aseconds");
                     if (UHC.blueTeam.contains(p)) {
                         Firework f = (Firework) p.getPlayer().getWorld().spawn(p.getLocation(), Firework.class);
                         FireworkMeta fm = f.getFireworkMeta();
@@ -48,7 +48,7 @@ public class FinalCountdown extends BukkitRunnable {
                                 .with(FireworkEffect.Type.BALL_LARGE)
                                 .withColor(Color.BLUE)
                                 .build());
-                        fm.setPower(4);
+                        fm.setPower(2);
                         f.setFireworkMeta(fm);
                     }
                     if(UHC.redTeam.contains(p)){
@@ -60,7 +60,7 @@ public class FinalCountdown extends BukkitRunnable {
                                 .with(FireworkEffect.Type.BALL_LARGE)
                                 .withColor(Color.RED)
                                 .build());
-                        fm.setPower(4);
+                        fm.setPower(2);
                         f.setFireworkMeta(fm);
                     }
                 }

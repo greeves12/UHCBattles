@@ -2,7 +2,9 @@ package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Main;
+import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -63,7 +65,15 @@ public class UHC {
                         p.getInventory().clear();
 
                         p.teleport(GetArena.getRedSpawn());
-                        SendCoolMessages.sendTitle(p,"§cYou have joined the §lRED §cteam!", 0, 2, 0);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(ThisPlugin.getPlugin(), new Runnable() {
+                            public void run() {
+                                SendCoolMessages.clearTitleAndSubtitle(p);
+                                SendCoolMessages.resetTitleAndSubtitle(p);
+                                SendCoolMessages.sendTitle(p, "§6", 10, 30, 10);
+                                SendCoolMessages.sendSubTitle(p, "§c§lYOU JOINED THE §4§lRED TEAM", 10, 30, 10);
+                            }
+                        }, 40);
+
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
@@ -80,7 +90,15 @@ public class UHC {
 
                         Color c = Color.fromRGB(0, 0, 255);
                         p.teleport(GetArena.getBlueSpawn());
-                        SendCoolMessages.sendTitle(p,"§bYou have joined the §3§lBLUE §bteam!", 0, 2, 0);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(ThisPlugin.getPlugin(), new Runnable() {
+                            public void run() {
+                                SendCoolMessages.clearTitleAndSubtitle(p);
+                                SendCoolMessages.resetTitleAndSubtitle(p);
+                                SendCoolMessages.sendTitle(p, "§6", 10, 50, 10);
+                                SendCoolMessages.sendSubTitle(p, "§9§lYOU JOINED THE §1§lBLUE TEAM", 10, 50, 10);
+                            }
+                        }, 40);
+
                         p.setGameMode(GameMode.SURVIVAL);
                         p.setFoodLevel(20);
                         p.setHealth(20);
@@ -108,10 +126,10 @@ public class UHC {
                 Main.startFinalCountdown();
                 for (Player p : Main.PlayingPlayers) {
                     if (redTeam.size() < blueTeam.size()) {
-                        SendCoolMessages.sendTitle(p, Main.prefix + "§3§lBlue §3team has won!", 1, 3, 0);
+                        SendCoolMessages.sendTitle(p,"§3§lBlue §3team has won!", 10, 50, 10);
                     }
                     if (blueTeam.size() < redTeam.size()) {
-                        SendCoolMessages.sendTitle(p,Main.prefix + "§c§lRed §cteam has won!", 1, 3, 0);
+                        SendCoolMessages.sendTitle(p,"§c§lRed §cteam has won!", 10, 50, 10);
                     }
             }
         }

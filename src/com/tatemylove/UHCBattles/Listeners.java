@@ -3,8 +3,10 @@ package com.tatemylove.UHCBattles;
 import com.tatemylove.UHCBattles.Arena.*;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
+import net.minecraft.server.v1_8_R3.PacketPlayInClientCommand;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -89,6 +91,13 @@ public class Listeners implements Listener {
     public void deathByPlayer(PlayerDeathEvent e){
         Player p = e.getEntity();
         Player pp = e.getEntity().getKiller();
+        final CraftPlayer craftPlayer = (CraftPlayer) p;
+        if(UHC.blueTeam.contains(p)){
+            UHC.blueTeam.remove(p);
+        }
+        if(UHC.redTeam.contains(p)){
+            UHC.redTeam.remove(p);
+        }
         if(Main.PlayingPlayers.contains(p) && (Main.PlayingPlayers.contains(pp))){
             for(Player ps : Main.PlayingPlayers){
                 ps.sendMessage(Main.prefix + "§bPlayer: §c" + p.getName() + " §dhas been killed by §c" + pp.getName());
@@ -104,6 +113,14 @@ public class Listeners implements Listener {
             p.sendMessage(Main.prefix + "§cYou have died and are being teleported back to the Hub");
             p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
         }
+        ThisPlugin.getPlugin().getServer().getScheduler().scheduleSyncDelayedTask(ThisPlugin.getPlugin(), new Runnable() {
+            @Override
+            public void run() {
+                if(p.isDead()){
+                    craftPlayer.getHandle().playerConnection.a(new PacketPlayInClientCommand(PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN));
+                }
+            }
+        });
     }
     @EventHandler
     public void heathRegen(EntityRegainHealthEvent e){
