@@ -1,6 +1,7 @@
 package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -15,6 +16,11 @@ public class ActivePinger  extends BukkitRunnable {
                 UHC.endUHC();
             } else if (UHC.blueTeam.size() == 0){
                 UHC.endUHC();
+            }
+        }
+        if(BaseArena.states == BaseArena.ArenaStates.Ended){
+            if(Bukkit.getOnlinePlayers().isEmpty()){
+                Bukkit.shutdown();
             }
         }
     }

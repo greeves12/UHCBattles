@@ -101,6 +101,17 @@ public class Listeners implements Listener {
         if(UHC.redTeam.contains(p)){
             UHC.redTeam.remove(p);
         }
+        if(Main.PlayingPlayers.contains(p)) {
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            DataOutputStream out = new DataOutputStream(b);
+            try {
+                out.writeUTF("Connect");
+                out.writeUTF("lobby");
+            } catch (IOException ei) {
+
+            }
+            p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
+        }
         ThisPlugin.getPlugin().getServer().getScheduler().scheduleSyncDelayedTask(ThisPlugin.getPlugin(), new Runnable() {
             @Override
             public void run() {
@@ -109,21 +120,9 @@ public class Listeners implements Listener {
                 }
             }
         });
-        if(Main.PlayingPlayers.contains(p) && (Main.PlayingPlayers.contains(pp))){
             for(Player ps : Main.PlayingPlayers){
                 ps.sendMessage(Main.prefix + "§bPlayer: §c" + p.getName() + " §dhas been killed by §c" + pp.getName());
             }
-            ByteArrayOutputStream b = new ByteArrayOutputStream();
-            DataOutputStream out = new DataOutputStream(b);
-            try{
-                out.writeUTF("Connect");
-                out.writeUTF("lobby");
-            }catch (IOException ei){
-
-            }
-            p.sendMessage(Main.prefix + "§cYou have died and are being teleported back to the Hub");
-            p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
-        }
     }
     @EventHandler
     public void heathRegen(EntityRegainHealthEvent e){

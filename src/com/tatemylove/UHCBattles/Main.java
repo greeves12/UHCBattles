@@ -76,6 +76,9 @@ public class Main extends JavaPlugin {
         finalcountdown = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new FinalCountdown(), 0L, 20L);
         FinalCountdown.timeuntilend = 5;
     }
+    public static void stopFinalCountdown(){
+        Bukkit.getServer().getScheduler().cancelTask(finalcountdown);
+    }
     public static void startCloseCountDown(){
         closeCountDownid = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new ServerCloseCountDown(), 0L, 20L);
         ServerCloseCountDown.timeuntilend = 3;

@@ -44,7 +44,6 @@ public class FinalCountdown extends BukkitRunnable {
                     }
                     p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
                 }
-                Bukkit.shutdown();
             }
             if (timeuntilend % 1 == 0) {
                 for (Player p : Main.PlayingPlayers) {
