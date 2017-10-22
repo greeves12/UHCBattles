@@ -1,6 +1,7 @@
 package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Main;
+import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -36,15 +37,17 @@ public class InternalCountDown extends BukkitRunnable {
                 }
             }
             if(timeuntilstart > 60) {
-            if(timeuntilstart % 60 == 0){
+            if(timeuntilstart % 300 == 0){
                     for (Player p : Main.PlayingPlayers) {
+                        SendCoolMessages.sendTitle(p, "§b§l" + String.valueOf(timeuntilstart/60) + " §aminutes", 20, 50, 20);
                         p.sendMessage(Main.prefix + "§b§lYou have §a§l" + timeuntilstart / 60 + " minutes§b§l to get prepared!");
                     }
                 }
             }
             if(timeuntilstart <= 60) {
-                if(timeuntilstart % 1 == 0) {
+                if(timeuntilstart % 10 == 0) {
                     for (Player p : Main.PlayingPlayers) {
+                        SendCoolMessages.sendTitle(p, "§b§l" + String.valueOf(timeuntilstart) + " §aseconds", 20, 50, 20);
                         p.sendMessage(Main.prefix + "§b§lYou have §a§l" + timeuntilstart + " seconds§b§l to get prepared!");
                     }
                 }

@@ -1,2 +1,6 @@
 #Let greeves12 change this for each UHC server, thanks
 server-id: 1
+#Change the header
+header: "&2&lRecon&f&l-&4&lNetwork"
+#Change the footer
+footer: "&dServer ID # %id%"

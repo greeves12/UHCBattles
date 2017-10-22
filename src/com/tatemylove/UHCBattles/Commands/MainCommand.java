@@ -1,9 +1,11 @@
 package com.tatemylove.UHCBattles.Commands;
 
 import com.tatemylove.UHCBattles.Arena.SetLobby;
+import com.tatemylove.UHCBattles.Arena.UHC;
 import com.tatemylove.UHCBattles.Main;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -56,6 +58,40 @@ public class MainCommand implements CommandExecutor {
 
                     }
                     p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
+                }
+            }
+            if(args[0].equalsIgnoreCase("pack")){
+                if(Main.PlayingPlayers.contains(p)){
+                    if(UHC.blueTeam.contains(p)){
+                        p.openInventory(UHC.blueTeamBack);
+                    }
+                    if(UHC.redTeam.contains(p)){
+                        p.openInventory(UHC.redTeamBack);
+                    }
+                }
+            }
+            if(args[0].equalsIgnoreCase("sc")){
+                if(Main.PlayingPlayers.contains(p)){
+                    if(UHC.blueTeam.contains(p)){
+                        double x = p.getLocation().getX();
+                        double y = p.getLocation().getY();
+                        double z = p.getLocation().getZ();
+
+                        for(Player pp : UHC.blueTeam){
+                            pp.sendMessage("§3[Blue] §l" + p.getName() + " §3coordinates are");
+                            pp.sendMessage("X: " + String.valueOf(Math.floor(x)) + ", Y:" + Math.floor(y) + ", Z:" + Math.floor(z));
+                        }
+                    }
+                    if(UHC.redTeam.contains(p)){
+                        double x = p.getLocation().getX();
+                        double y = p.getLocation().getY();
+                        double z = p.getLocation().getZ();
+
+                        for(Player pp : UHC.redTeam){
+                            pp.sendMessage("§c[Red] §l" + p.getName() + " §ccoordinates are");
+                            pp.sendMessage("X: " + String.valueOf(Math.floor(x)) + ", Y:" + Math.floor(y) + ", Z:" + Math.floor(z));
+                        }
+                    }
                 }
             }
         }

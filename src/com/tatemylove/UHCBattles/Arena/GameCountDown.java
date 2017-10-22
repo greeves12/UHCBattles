@@ -40,7 +40,9 @@ public class GameCountDown extends BukkitRunnable{
             }
             if ((TimeUntilStart % 10 == 0) || (TimeUntilStart < 0)) {
                 for (Player p : Main.WaitingPlayers) {
-                    p.sendMessage(Main.prefix + TimeUntilStart + " §aseconds until start!");
+                    if (Main.WaitingPlayers.size() >= Main.min_players) {
+                        p.sendMessage(Main.prefix + TimeUntilStart + " §aseconds until start!");
+                    }
                 }
             }
             if (Main.WaitingPlayers.size() >= Main.min_players) {

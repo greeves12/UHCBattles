@@ -5,15 +5,18 @@ import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.fusesource.jansi.Ansi;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class FinalCountdown extends BukkitRunnable {
 
@@ -23,6 +26,13 @@ public class FinalCountdown extends BukkitRunnable {
     public void run() {
         if (BaseArena.states == BaseArena.ArenaStates.Ended) {
             if (timeuntilend == 0) {
+                World world = Bukkit.getServer().getWorld("uhc");
+                List<Entity> entList = world.getEntities();
+                for(Entity current : entList){
+                    if(current instanceof Item){
+                        current.remove();
+                    }
+                }
                 for (Player p : Main.PlayingPlayers) {
                     ByteArrayOutputStream b = new ByteArrayOutputStream();
                     DataOutputStream out = new DataOutputStream(b);

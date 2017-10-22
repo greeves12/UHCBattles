@@ -9,6 +9,7 @@ import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Files.LobbyFile;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,12 +20,13 @@ public class Main extends JavaPlugin {
     public static String prefix = "§6§l[§b§lU§c§lH§a§lC§f§l-§5§lB§3§la§2§lt§d§lt§8§ll§7§le§a§ls§6§l] ";
     public static ArrayList<Player> WaitingPlayers = new ArrayList<>();
     public static ArrayList<Player> PlayingPlayers = new ArrayList<>();
-    public static int min_players = 1;
-    public static int max_players = 10;
+    public static int min_players = 2;
     public static int startCountDownId;
     public static int startCountDownInternal;
     public static int finalcountdown;
     private ProtocolManager protocolManager;
+    public static int closeCountDownid;
+
 
 
     public void onEnable(){
@@ -50,7 +52,7 @@ public class Main extends JavaPlugin {
     }
     public void startCountDown(){
         startCountDownId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new GameCountDown(this), 0L, 20L);
-        GameCountDown.TimeUntilStart = 10;
+        GameCountDown.TimeUntilStart = 80;
     }
 
     public void stopCountDown(){
@@ -64,7 +66,7 @@ public class Main extends JavaPlugin {
 
     public void startCountDownInternal(){
         startCountDownInternal = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new InternalCountDown(this), 0L, 20L);
-        InternalCountDown.timeuntilstart = 10;
+        InternalCountDown.timeuntilstart = 1800;
     }
     public void stopCountDownInternal(){
         getServer().getScheduler().cancelTask(startCountDownInternal);
@@ -73,5 +75,9 @@ public class Main extends JavaPlugin {
     public static void startFinalCountdown(){
         finalcountdown = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new FinalCountdown(), 0L, 20L);
         FinalCountdown.timeuntilend = 5;
+    }
+    public static void startCloseCountDown(){
+        closeCountDownid = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new ServerCloseCountDown(), 0L, 20L);
+        ServerCloseCountDown.timeuntilend = 3;
     }
 }

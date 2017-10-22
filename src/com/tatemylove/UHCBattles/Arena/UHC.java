@@ -9,6 +9,7 @@ import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
@@ -22,6 +23,8 @@ public class UHC {
     public static ArrayList<Player> blueTeam = new ArrayList<>();
     public static ArrayList<Player> pls = Main.PlayingPlayers;
     public static int time = InternalCountDown.timeuntilstart / 60;
+    public static Inventory blueTeamBack = Bukkit.createInventory(null, 54, "§bBlue Team Storage");
+    public static Inventory redTeamBack = Bukkit.createInventory(null, 54, "§cRed Team Storage");
 
     public static void AssignTeam(String id) {
         if (BaseArena.states == BaseArena.ArenaStates.Started) {
@@ -85,6 +88,8 @@ public class UHC {
                         p.getInventory().setChestplate(getColorArmor(Material.LEATHER_CHESTPLATE, c));
                         p.getInventory().setLeggings(getColorArmor(Material.LEATHER_LEGGINGS, c));
                         p.getInventory().setBoots(getColorArmor(Material.LEATHER_BOOTS, c));
+                        ItemStack steak = new ItemStack(Material.COOKED_BEEF, 10);
+                        p.getInventory().setItem(3, steak);
                     } else if (blueTeam.contains(p)) {
                         p.getInventory().clear();
 
@@ -109,6 +114,8 @@ public class UHC {
                         p.getInventory().setChestplate(getColorArmor(Material.LEATHER_CHESTPLATE, c));
                         p.getInventory().setLeggings(getColorArmor(Material.LEATHER_LEGGINGS, c));
                         p.getInventory().setBoots(getColorArmor(Material.LEATHER_BOOTS, c));
+                        ItemStack steak = new ItemStack(Material.COOKED_BEEF, 10);
+                        p.getInventory().setItem(3, steak);
                     }
                 }
             }
@@ -132,5 +139,7 @@ public class UHC {
                         SendCoolMessages.sendTitle(p,"§c§lRed §cteam has won!", 10, 50, 10);
                     }
             }
+                redTeamBack.clear();
+                blueTeamBack.clear();
         }
 }
