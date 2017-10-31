@@ -38,7 +38,7 @@ public class FinalCountdown extends BukkitRunnable {
                     DataOutputStream out = new DataOutputStream(b);
                     try {
                         out.writeUTF("Connect");
-                        out.writeUTF("lobby");
+                        out.writeUTF("uhclobby");
                     } catch (IOException e) {
 
                     }

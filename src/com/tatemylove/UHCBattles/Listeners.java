@@ -3,10 +3,14 @@ package com.tatemylove.UHCBattles;
 import com.tatemylove.UHCBattles.Arena.*;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
+import net.mcjukebox.plugin.bukkit.api.JukeboxAPI;
+import net.mcjukebox.plugin.bukkit.api.ResourceType;
+import net.mcjukebox.plugin.bukkit.api.models.Media;
 import net.minecraft.server.v1_8_R3.PacketPlayInClientCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Jukebox;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -17,11 +21,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.ByteArrayOutputStream;
@@ -45,22 +48,23 @@ public class Listeners implements Listener {
     }
     @EventHandler
     public void onHit(EntityDamageEvent e) {
-        Player p = (Player) e.getEntity();
+
         Entity entity = e.getEntity();
-        if (Main.PlayingPlayers.contains(p)) {
-            if (InternalCountDown.timeuntilstart > 0) {
-               if(e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK){
-                   if(entity instanceof Player){
-                       e.setCancelled(true);
-                   }
+        if(entity instanceof Player) {
+            Player p = (Player) entity;
+            if (Main.PlayingPlayers.contains(p)) {
+                if (InternalCountDown.timeuntilstart > 0) {
+                    if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+                            e.setCancelled(true);
+                    }
+                }
+                if (InternalCountDown.timeuntilstart < 0) {
+                    e.setCancelled(false);
                 }
             }
-            if(InternalCountDown.timeuntilstart < 0){
-                e.setCancelled(false);
+            if (Main.WaitingPlayers.contains(p)) {
+                e.setCancelled(true);
             }
-        }
-        if(Main.WaitingPlayers.contains(p)){
-            e.setCancelled(true);
         }
     }
     @EventHandler
@@ -95,6 +99,7 @@ public class Listeners implements Listener {
         Player p = e.getEntity();
         Player pp = e.getEntity().getKiller();
         final CraftPlayer craftPlayer = (CraftPlayer) p;
+
         if(UHC.blueTeam.contains(p)){
             UHC.blueTeam.remove(p);
         }
@@ -106,7 +111,7 @@ public class Listeners implements Listener {
             DataOutputStream out = new DataOutputStream(b);
             try {
                 out.writeUTF("Connect");
-                out.writeUTF("lobby");
+                out.writeUTF("uhclobby");
             } catch (IOException ei) {
 
             }
@@ -154,13 +159,25 @@ public class Listeners implements Listener {
             p.getInventory().setItem(8, leave);
             p.setHealth(20);
             p.setFoodLevel(20);
+            ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
+            BookMeta bm = (BookMeta) book.getItemMeta();
+            bm.setDisplayName("§5§lInformation");
+            bm.setPages("§b§l§nAbout:" + "\n\n" + "§5This is a Gamemode that consists of two teams of 5 that will include Strategic  PvP and Teamwork! You will start off with 10 steak at the start of each game and will have 30 minutes to go and get resources from both mining in caves and gathering", "§5resources on the surface. Once 30 minutes is up you will get teleported to surface where you can either meet up with you're team and go fight the other team or you can go solo and fight the other team. Remember to have fun!",
+                    "§b§l§nCommands:" + "\n\n" + "§5Chat is automatically filtered to team chat!" + "\n\n" + "/battles pack §2~ Opens up your teams storage" + "\n\n" + "§5/battles sc §2~ Sends your coordinates to your teammates",
+                    "§b§l§nUseful Information" + "\n\n" + "§5Trees have a chance of dropping a golden apple" + "\n\n" + "At the end of 30 minutes you will be automatically teleported to the surface" + "\n\n" + "PvP is disabled during the 30 minutes but", "§5you can still take damage from other things"+
+            "\n\n" + "CutClean is installed on our servers meaning you don't have to smelt" + "\n\n" + "Have fun! §2" + p.getName());
+            bm.setAuthor("tatemylove");
+            bm.setTitle("§5§lInformation");
+            book.setItemMeta(bm);
+            p.getInventory().setItem(1, book);
+
         }
         if(BaseArena.states == BaseArena.ArenaStates.Started){
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(b);
             try{
                 out.writeUTF("Connect");
-                out.writeUTF("lobby");
+                out.writeUTF("uhclobby");
             }catch (IOException ei){
 
             }
@@ -172,13 +189,7 @@ public class Listeners implements Listener {
     }
     @EventHandler
     public void leavesChange(LeavesDecayEvent e){
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("§5Restores a lil bit of health");
         ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE, 1);
-        ItemMeta goldenMeta = goldenApple.getItemMeta();
-        goldenMeta.setDisplayName("§2§lUHC§f§l-§8§lApple");
-        goldenMeta.setLore(lore);
-        goldenApple.setItemMeta(goldenMeta);
         int i = ThreadLocalRandom.current().nextInt(100) + 1;
         if(e.getBlock().getType() == Material.LEAVES) {
             if (i > 0 && i <= 1) {
@@ -224,11 +235,29 @@ public class Listeners implements Listener {
                 DataOutputStream out = new DataOutputStream(b);
                 try{
                     out.writeUTF("Connect");
-                    out.writeUTF("lobby");
+                    out.writeUTF("uhclobby");
                 }catch (IOException io){
 
                 }
                 p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
+            }
+        }
+    }
+    @EventHandler
+    public void invRemove(PlayerDropItemEvent e){
+        Player p = e.getPlayer();
+        if(Main.WaitingPlayers.contains(p)){
+            if(!p.hasPermission("uhc.remove")){
+                e.setCancelled(true);
+            }
+        }
+    }
+    @EventHandler
+    public void invRemove2(InventoryClickEvent e){
+        Player p = (Player) e.getWhoClicked();
+        if(Main.WaitingPlayers.contains(p)){
+            if(!p.hasPermission("uhc.remove2")){
+                e.setCancelled(true);
             }
         }
     }

@@ -18,7 +18,7 @@ public class ActivePinger  extends BukkitRunnable {
                 UHC.endUHC();
             }
         }
-        if(BaseArena.states == BaseArena.ArenaStates.Ended){
+        if(BaseArena.states == BaseArena.ArenaStates.Ended || BaseArena.states == BaseArena.ArenaStates.Started){
             if(Bukkit.getOnlinePlayers().isEmpty()){
                 Bukkit.shutdown();
             }

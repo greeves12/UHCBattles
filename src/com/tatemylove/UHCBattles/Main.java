@@ -26,6 +26,7 @@ public class Main extends JavaPlugin {
     public static int finalcountdown;
     private ProtocolManager protocolManager;
     public static int closeCountDownid;
+    public static int shirnk;
 
 
 
@@ -82,5 +83,12 @@ public class Main extends JavaPlugin {
     public static void startCloseCountDown(){
         closeCountDownid = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new ServerCloseCountDown(), 0L, 20L);
         ServerCloseCountDown.timeuntilend = 3;
+    }
+    public static void startShrink(){
+        shirnk = Bukkit.getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new ShrinkBorder(), 0L, 20L);
+        ShrinkBorder.timeuntilshrink = 900;
+    }
+    public static void stopShrink(){
+        Bukkit.getServer().getScheduler().cancelTask(shirnk);
     }
 }

@@ -2,6 +2,9 @@ package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Main;
 import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
+import net.mcjukebox.plugin.bukkit.api.JukeboxAPI;
+import net.mcjukebox.plugin.bukkit.api.ResourceType;
+import net.mcjukebox.plugin.bukkit.api.models.Media;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -34,7 +37,12 @@ public class InternalCountDown extends BukkitRunnable {
                     location.setY(p.getWorld().getHighestBlockAt(location.getBlockX(), location.getBlockZ()).getY());
                     p.teleport(location);
 
+                    Media media = new Media(ResourceType.MUSIC, "http://k003.kiwi6.com/hotlink/qi8zcezgta/Epic_Chase_Music_-_Run_Copyright_and_Royalty_Free_-_AudioTrimmer.com_.mp3");
+                    media.setVolume(75);
+                    media.setLooping(false);
+                    JukeboxAPI.play(p, media);
                 }
+                Main.startShrink();
             }
             if(timeuntilstart > 60) {
             if(timeuntilstart % 300 == 0){
