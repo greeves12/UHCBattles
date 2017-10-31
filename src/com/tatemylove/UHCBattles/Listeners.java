@@ -1,11 +1,10 @@
 package com.tatemylove.UHCBattles;
 
 import com.tatemylove.UHCBattles.Arena.*;
+import com.tatemylove.UHCBattles.MySQL.Deaths;
+import com.tatemylove.UHCBattles.MySQL.Kills;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
-import net.mcjukebox.plugin.bukkit.api.JukeboxAPI;
-import net.mcjukebox.plugin.bukkit.api.ResourceType;
-import net.mcjukebox.plugin.bukkit.api.models.Media;
 import net.minecraft.server.v1_8_R3.PacketPlayInClientCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -100,6 +99,11 @@ public class Listeners implements Listener {
         Player pp = e.getEntity().getKiller();
         final CraftPlayer craftPlayer = (CraftPlayer) p;
 
+        Kills.firstWin(pp);
+        Kills.addWins(pp);
+        Deaths.firstWin(p);
+        Deaths.addWins(p);
+
         if(UHC.blueTeam.contains(p)){
             UHC.blueTeam.remove(p);
         }
@@ -173,15 +177,6 @@ public class Listeners implements Listener {
 
         }
         if(BaseArena.states == BaseArena.ArenaStates.Started){
-            ByteArrayOutputStream b = new ByteArrayOutputStream();
-            DataOutputStream out = new DataOutputStream(b);
-            try{
-                out.writeUTF("Connect");
-                out.writeUTF("uhclobby");
-            }catch (IOException ei){
-
-            }
-            p.sendPluginMessage(ThisPlugin.getPlugin(), "BungeeCord", b.toByteArray());
             e.setJoinMessage(null);
         }
         SendCoolMessages.TabHeaderAndFooter("", "", p);

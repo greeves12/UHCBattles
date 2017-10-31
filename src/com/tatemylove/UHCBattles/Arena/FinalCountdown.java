@@ -1,6 +1,7 @@
 package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Main;
+import com.tatemylove.UHCBattles.MySQL.Wins;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -34,6 +35,8 @@ public class FinalCountdown extends BukkitRunnable {
                     }
                 }
                 for (Player p : Main.PlayingPlayers) {
+                    Wins.firstWin(p);
+                    Wins.addWins(p);
                     ByteArrayOutputStream b = new ByteArrayOutputStream();
                     DataOutputStream out = new DataOutputStream(b);
                     try {

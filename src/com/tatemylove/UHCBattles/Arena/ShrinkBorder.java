@@ -1,6 +1,7 @@
 package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Main;
+import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
@@ -22,8 +23,10 @@ public class ShrinkBorder extends BukkitRunnable {
                 }
             }
             if (timeuntilshrink % 300 == 0) {
+                double x = ThisPlugin.getPlugin().getConfig().getDouble("x");
+                double z = ThisPlugin.getPlugin().getConfig().getDouble("z");
                 WorldBorder wb = Bukkit.getWorld("uhc").getWorldBorder();
-                wb.setCenter(-145, -1121);
+                wb.setCenter(x, z);
                 wb.setSize(size);
                 size -= 50;
                 for(Player p : Main.PlayingPlayers){

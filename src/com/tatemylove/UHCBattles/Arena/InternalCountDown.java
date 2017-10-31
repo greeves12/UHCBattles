@@ -2,13 +2,7 @@ package com.tatemylove.UHCBattles.Arena;
 
 import com.tatemylove.UHCBattles.Main;
 import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
-import net.mcjukebox.plugin.bukkit.api.JukeboxAPI;
-import net.mcjukebox.plugin.bukkit.api.ResourceType;
-import net.mcjukebox.plugin.bukkit.api.models.Media;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -29,18 +23,14 @@ public class InternalCountDown extends BukkitRunnable {
             if(timeuntilstart == 0){
                 plugin.stopCountDownInternal();
                 for(Player p : Main.PlayingPlayers){
+                    SendCoolMessages.sendTitle(p,Main.prefix + "§5§lCombat has started!!", 30, 50, 30);
                     p.sendMessage(Main.prefix + "§5§lCombat has started!!");
-
                     Location location = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
                     location.setX( p.getLocation().getX() + Math.random() * 3);
                     location.setZ( p.getLocation().getZ() + Math.random() * 3);
                     location.setY(p.getWorld().getHighestBlockAt(location.getBlockX(), location.getBlockZ()).getY());
                     p.teleport(location);
 
-                    Media media = new Media(ResourceType.MUSIC, "http://k003.kiwi6.com/hotlink/qi8zcezgta/Epic_Chase_Music_-_Run_Copyright_and_Royalty_Free_-_AudioTrimmer.com_.mp3");
-                    media.setVolume(75);
-                    media.setLooping(false);
-                    JukeboxAPI.play(p, media);
                 }
                 Main.startShrink();
             }

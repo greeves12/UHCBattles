@@ -7,6 +7,7 @@ import com.tatemylove.UHCBattles.Commands.MainCommand;
 import com.tatemylove.UHCBattles.Files.AchievementFile;
 import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Files.LobbyFile;
+import com.tatemylove.UHCBattles.MySQL.MySQL;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,12 +26,17 @@ public class Main extends JavaPlugin {
     public static int startCountDownInternal;
     public static int finalcountdown;
     private ProtocolManager protocolManager;
-    public static int closeCountDownid;
     public static int shirnk;
-
+    private MySQL mySQL;
 
 
     public void onEnable(){
+        String ip = ThisPlugin.getPlugin().getConfig().getString("MySQL.Ip");
+        String userName = ThisPlugin.getPlugin().getConfig().getString("MySQL.Username");
+        String password = ThisPlugin.getPlugin().getConfig().getString("MySQL.Password");
+        String db = ThisPlugin.getPlugin().getConfig().getString("MySQL.Database");
+        mySQL = new MySQL(ip, userName, password, db);
+
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
         protocolManager = ProtocolLibrary.getProtocolManager();
         BaseArena.states = BaseArena.ArenaStates.Countdown;
@@ -76,13 +82,6 @@ public class Main extends JavaPlugin {
     public static void startFinalCountdown(){
         finalcountdown = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new FinalCountdown(), 0L, 20L);
         FinalCountdown.timeuntilend = 5;
-    }
-    public static void stopFinalCountdown(){
-        Bukkit.getServer().getScheduler().cancelTask(finalcountdown);
-    }
-    public static void startCloseCountDown(){
-        closeCountDownid = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new ServerCloseCountDown(), 0L, 20L);
-        ServerCloseCountDown.timeuntilend = 3;
     }
     public static void startShrink(){
         shirnk = Bukkit.getScheduler().scheduleSyncRepeatingTask(ThisPlugin.getPlugin(), new ShrinkBorder(), 0L, 20L);

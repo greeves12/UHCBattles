@@ -4,9 +4,6 @@ import com.tatemylove.UHCBattles.Files.ArenaFile;
 import com.tatemylove.UHCBattles.Main;
 import com.tatemylove.UHCBattles.ThisPlugin.ThisPlugin;
 import com.tatemylove.UHCBattles.Utilities.SendCoolMessages;
-import net.mcjukebox.plugin.bukkit.api.JukeboxAPI;
-import net.mcjukebox.plugin.bukkit.api.ResourceType;
-import net.mcjukebox.plugin.bukkit.api.models.Media;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -91,11 +88,6 @@ public class UHC {
                         ItemStack steak = new ItemStack(Material.COOKED_BEEF, 10);
                         p.getInventory().setItem(3, steak);
 
-                        //Starting music, does not loop
-                        Media media = new Media(ResourceType.MUSIC, "http://k003.kiwi6.com/hotlink/zcvly2tbt1/Djuro_-_Drop_That_Bass_Original_Mix_-_AudioTrimmer.com_1_.mp3");
-                        media.setLooping(false);
-                        media.setVolume(75);
-                        JukeboxAPI.play(p, media);
                     } else if (blueTeam.contains(p)) {
                         p.getInventory().clear();
 
@@ -123,15 +115,12 @@ public class UHC {
                         ItemStack steak = new ItemStack(Material.COOKED_BEEF, 10);
                         p.getInventory().setItem(3, steak);
 
-                        //Starting music, does not loop
-                        Media media = new Media(ResourceType.MUSIC, "http://k003.kiwi6.com/hotlink/zcvly2tbt1/Djuro_-_Drop_That_Bass_Original_Mix_-_AudioTrimmer.com_1_.mp3");
-                        media.setLooping(false);
-                        media.setVolume(75);
-                        JukeboxAPI.play(p, media);
                     }
                 }
+                double x = ThisPlugin.getPlugin().getConfig().getDouble("x");
+                double z = ThisPlugin.getPlugin().getConfig().getDouble("z");
                 WorldBorder wb = Bukkit.getWorld("uhc").getWorldBorder();
-                wb.setCenter(-145, -1121);
+                wb.setCenter(x, z);
                 wb.setSize(500);
             }
         }
@@ -147,10 +136,6 @@ public class UHC {
                 BaseArena.states = BaseArena.ArenaStates.Ended;
                 Main.startFinalCountdown();
                 for (Player p : Main.PlayingPlayers) {
-                    Media media = new Media(ResourceType.MUSIC, "http://k003.kiwi6.com/hotlink/q7x5uv492m/Queen_-_We_Are_The_Champions_Lyrics_-_AudioTrimmer.com_.mp3");
-                    media.setLooping(false);
-                    media.setVolume(75);
-                    JukeboxAPI.play(p, media);
                     if (redTeam.size() < blueTeam.size()) {
                         SendCoolMessages.sendTitle(p,"§3§lBlue §3team has won!", 10, 50, 10);
                     }
