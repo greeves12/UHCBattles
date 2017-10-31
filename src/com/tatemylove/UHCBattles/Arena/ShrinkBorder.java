@@ -21,7 +21,7 @@ public class ShrinkBorder extends BukkitRunnable {
                     p.sendMessage(Main.prefix + "§bBorder is final and won't shrink");
                 }
             }
-            if (timeuntilshrink % 60 == 0) {
+            if (timeuntilshrink % 300 == 0) {
                 WorldBorder wb = Bukkit.getWorld("uhc").getWorldBorder();
                 wb.setCenter(-145, -1121);
                 wb.setSize(size);
